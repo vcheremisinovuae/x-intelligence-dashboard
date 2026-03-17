@@ -63,7 +63,7 @@ function cardStyle() {
     background: "#0f172a",
     border: "1px solid #1e293b",
     borderRadius: 24,
-  } as const;
+  };
 }
 
 export default function HomePage() {
@@ -93,11 +93,11 @@ export default function HomePage() {
     });
   }, [enrichedPosts, selectedTopic, savedOnly, query]);
 
-  function toggleSaved(postId: number) {
+  function toggleSaved(postId) {
     setPosts((current) => current.map((post) => (post.id === postId ? { ...post, saved: !post.saved } : post)));
   }
 
-  function toggleSource(sourceId: number) {
+  function toggleSource(sourceId) {
     setSources((current) => current.map((source) => (source.id === sourceId ? { ...source, active: !source.active } : source)));
   }
 
@@ -283,9 +283,13 @@ export default function HomePage() {
                   onChange={(e) => setNewTopic(e.target.value)}
                   style={{ padding: "12px 14px", borderRadius: 12, border: "1px solid #334155", background: "#020617", color: "white" }}
                 >
-                  {topics.filter((t) => t.key !== "all").map((topic) => (
-                    <option key={topic.key} value={topic.key}>{topic.label}</option>
-                  ))}
+                  {topics
+                    .filter((t) => t.key !== "all")
+                    .map((topic) => (
+                      <option key={topic.key} value={topic.key}>
+                        {topic.label}
+                      </option>
+                    ))}
                 </select>
                 <button
                   onClick={addSource}
